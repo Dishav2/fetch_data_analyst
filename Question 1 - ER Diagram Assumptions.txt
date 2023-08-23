@@ -1,0 +1,7 @@
+a. It is assumed that the _id column and rewardsReceiptItemList from Receipts table are extracted and another BRIDGE entity called as "rewardsReceiptItemList" is created to establish a relationship between Brand and Receipt entities. The column "barcode" will be used as a common ciolumn for these two tables. 
+
+ 
+b. Since the date column does not clearly indicate the month and year, it is assumed that the dates are of recent month/year (i.e. 2023).
+
+
+c. The barcode value of the Brand and rewardsReceiptItemList entities have different formats. However, it is assumed that if we apply substring and remove the first 8 characters in the brand table, it could match with the rewardsReceiptItemList table. 
