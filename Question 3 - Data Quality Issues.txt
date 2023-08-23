@@ -1,0 +1,3 @@
+A. Data Duplication: The user dataset has full duplicate rows. (Please see screenshots for SQL queries with findings)
+
+B. The date format for all the three dataset does not appear to be as per the standard dates. (Please see screenshots for SQL queries with findings)
