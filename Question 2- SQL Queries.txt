@@ -1,0 +1,57 @@
+Question #2: SQL Queries
+
+1. What are the top 5 brands by receipts scanned for most recent month?
+SELECT TOP (5) BR.name, RE.dateScanned FROM rewardsReceiptItemList RL
+INNER JOIN RECEIPTS RE ON RL.Receipts_ID = RE._id
+INNER JOIN BRAND ON RL.barcode = BR.barcode
+WHERE MONTH(dateScanned) = MONTH(now())    ###do I need this statement?
+ORDER BY quantityPurchased
+
+2. How does the ranking of the top 5 brands by receipts scanned for the recent month compare to the ranking for the previous month? (To run these queries simultaneously in MSSQL for comparison)
+SELECT TOP (5) BR.name, RE.dateScanned FROM rewardsReceiptItemList RL
+INNER JOIN RECEIPTS RE ON RL.Receipts_ID = RE._id
+INNER JOIN BRAND ON RL.barcode = BR.barcode
+WHERE MONTH(dateScanned) = MONTH(now())
+ORDER BY quantityPurchased
+
+
+SELECT TOP (5) BR.name, RE.dateScanned FROM rewardsReceiptItemList RL
+INNER JOIN RECEIPTS RE ON RL.Receipts_ID = RE._id
+INNER JOIN BRAND ON RL.barcode = BR.barcode
+WHERE MONTH(dateScanned) = MONTH(DATEADD(MONTH, -1, CURRENT_TIMESTAMP))
+ORDER BY quantityPurchased
+
+
+3. When considering average spend from receipts with 'rewardsReceiptStatus’ of ‘Accepted’ or ‘Rejected’, which is greater?
+SELECT AVG(totalSpent) FROM RECEIPTS
+WHERE rewardsReceiptStatus = "ACCEPTED" OR rewardsReceiptStatus = "REJECTED"
+GROUP BY rewardsReceiptStatus
+
+4. When considering total number of items purchased from receipts with 'rewardsReceiptStatus’ of ‘Accepted’ or ‘Rejected’, which is greater?
+SELECT quantityPurchased FROM RECEIPTS
+INNER JOIN rewardsReceiptItemList RL ON RL.Receipts_ID = RE._id
+WHERE rewardsReceiptStatus = "ACCEPTED" OR rewardsReceiptStatus = "REJECTED"
+GROUP BY quantityPurchased
+
+
+5. Which brand has the most spend among users who were created within the past 6 months?
+SELECT BR.name, MAX(totalSpent) FROM BRAND BR
+INNER JOIN
+(SELECT * FROM RECEIPTS RE
+INNER JOIN rewardsReceiptItemList RL ON RL.Receipts_ID = RE._id
+INNER JOIN USERS U on RE.userId = U._id
+WHERE U.createdDate IN (March2023, August2023)
+) t
+ON BR.barcode = RL.barcode
+
+
+
+6. Which brand has the most transactions among users who were created within the past 6 months?
+SELECT BR.name, MAX(pointsEarned) FROM BRAND BR
+INNER JOIN
+(SELECT * FROM RECEIPTS RE
+INNER JOIN rewardsReceiptItemList RL ON RL.Receipts_ID = RE._id
+INNER JOIN USERS U on RE.userId = U._id
+WHERE U.createdDate IN (March2023, August2023)
+) t
+ON BR.barcode = RL.barcode
