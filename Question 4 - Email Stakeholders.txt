@@ -1,0 +1,10 @@
+Dear Stakeholder,
+
+I am writing to discuss potential data quality issues with the recent data schema provided to us. Could you help us answer a few questions in reference to the users, receipts and brand data files.
+
+1.  We have found multiple records for some users' data. We have seen instances where the same user is created multiple times in a day. Is this an expected behavior?
+2. We are having trouble interpreting the date format found in the data schema (1609687444800) in 'receipts' and 'users' data files. Could you help us interpret this date so we can convert it to a more readable format. 	
+
+I have enclosed samples with this email for your reference. 
+
+Please let me know if you have any questions or if there’s anything else I can help you with.
